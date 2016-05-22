@@ -12,8 +12,7 @@ class TestAddUser < Test::Unit::TestCase
 
   def test_add_user
     add_user
-
-    user_link = @driver.find_element(:link, "#{@login}\s#{@login}")
+    user_link = @driver.find_element(:link, "#{@login1}\s#{@login1}")
     assert(user_link.displayed?)
   end
 

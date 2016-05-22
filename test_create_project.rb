@@ -12,9 +12,8 @@ class TestCreateProject < Test::Unit::TestCase
 
   def test_create_project
     create_project
-    expected_text = 'Successful creation.'
-    actual_text = @driver.find_element(:id, 'flash_notice').text
-    assert_equal(expected_text,actual_text)
+    actual_text = @driver.find_element(:id, 'flash_notice')
+    assert(actual_text.displayed?)
   end
 
   def teardown
