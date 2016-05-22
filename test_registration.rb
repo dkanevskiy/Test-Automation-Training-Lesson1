@@ -1,9 +1,9 @@
 require 'test-unit'
 require 'selenium-webdriver'
-require_relative 'registration.rb'
+require_relative 'helper_methods'
 
 class TestRegistration < Test::Unit::TestCase
-  include Registration
+  include HelperMethods
 
   def setup
     @driver = Selenium::WebDriver.for :firefox

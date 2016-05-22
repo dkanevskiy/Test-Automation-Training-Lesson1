@@ -1,9 +1,9 @@
 require 'test-unit'
 require 'selenium-webdriver'
-require_relative 'create_project_version.rb'
+require_relative 'helper_methods'
 
 class TestCreateProjectVersion < Test::Unit::TestCase
-  include CreateProjectVersion
+  include HelperMethods
 
   def setup
     @driver = Selenium::WebDriver.for :firefox

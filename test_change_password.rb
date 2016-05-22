@@ -1,9 +1,9 @@
 require 'test-unit'
 require 'selenium-webdriver'
-require_relative 'change_password.rb'
+require_relative 'helper_methods'
 
 class TestChangePassword < Test::Unit::TestCase
-  include ChangePassword
+  include HelperMethods
 
   def setup
     @driver = Selenium::WebDriver.for :firefox

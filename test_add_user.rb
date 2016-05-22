@@ -1,9 +1,9 @@
 require 'test-unit'
 require 'selenium-webdriver'
-require_relative 'add_user'
+require_relative 'helper_methods'
 
 class TestAddUser < Test::Unit::TestCase
-  include AddUser
+  include HelperMethods
 
   def setup
     @driver = Selenium::WebDriver.for :firefox

@@ -1,9 +1,9 @@
 require 'test-unit'
 require 'selenium-webdriver'
-require_relative 'edit_user'
+require_relative 'helper_methods'
 
 class TestEditUser < Test::Unit::TestCase
-  include EditUser
+  include HelperMethods
 
   def setup
     @driver = Selenium::WebDriver.for :firefox
