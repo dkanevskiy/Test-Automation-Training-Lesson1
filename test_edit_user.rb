@@ -11,6 +11,8 @@ class TestEditUser < Test::Unit::TestCase
   end
 
   def test_edit_user
+    register_user
+    create_project
     edit_user
     @wait.until {@driver.find_element(:xpath, ".//span[contains(.,'Manager, Developer')]").displayed?}
     user_roles = @driver.find_element(:xpath, ".//span[contains(.,'Manager, Developer')]")

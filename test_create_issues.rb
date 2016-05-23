@@ -11,6 +11,8 @@ class TestCreateIssues < Test::Unit::TestCase
   end
 
   def test_create_issues
+    register_user
+    create_project
     create_issues
 
     issue1 = @driver.find_element(:link, @issue1_subject)

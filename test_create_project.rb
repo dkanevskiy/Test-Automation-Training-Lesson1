@@ -11,6 +11,7 @@ class TestCreateProject < Test::Unit::TestCase
   end
 
   def test_create_project
+    register_user
     create_project
     actual_text = @driver.find_element(:id, 'flash_notice')
     assert(actual_text.displayed?)

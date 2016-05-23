@@ -11,7 +11,9 @@ class TestChangePassword < Test::Unit::TestCase
   end
 
   def test_change_password
+    register_user
     change_password
+
     actual_text = @driver.find_element(:id, 'flash_notice')
     assert(actual_text.displayed?)
   end

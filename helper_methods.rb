@@ -31,8 +31,9 @@ module HelperMethods
   end
 
   def login_user
-    register_user
-    @driver.find_element(:class, 'logout').click
+    if @driver.find_element(:class, 'logout').displayed?
+      @driver.find_element(:class, 'logout').click
+    end
     @driver.find_element(:class, 'login').click
     @driver.find_element(:id, 'username').send_keys @login
     @driver.find_element(:id, 'password').send_keys @password
@@ -40,18 +41,16 @@ module HelperMethods
   end
 
   def change_password
-    register_user
     @new_password = @password + '1'
     @driver.find_element(:class, "my-account").click
     @driver.find_element(:xpath, ".//*[@id='content']//a[@class='icon icon-passwd']").click
     @driver.find_element(:id, "password").send_keys(@password)
     @driver.find_element(:id, "new_password").send_keys(@new_password)
     @driver.find_element(:id, "new_password_confirmation").send_keys(@new_password)
-    @driver.find_element(:xpath, "//*[@name='commit']").click
+    @driver.find_element(:name, "commit").click
   end
 
   def create_project
-    register_user
     @driver.find_element(:class, "projects").click
     @driver.find_element(:xpath, ".//*[@id='content']//a[@class='icon icon-add']").click
     @project_name = 'Project' + rand(9999).to_s
@@ -60,7 +59,6 @@ module HelperMethods
   end
 
   def create_project_version
-    create_project
     @driver.find_element(:id, 'tab-versions').click
     @driver.find_element(:xpath, ".//*[@id='tab-content-versions']//a[@class='icon icon-add']").click
     @version_name = 'version'+rand(99999).to_s
@@ -69,7 +67,6 @@ module HelperMethods
   end
 
   def create_issues
-    create_project
     @issue1_subject = 'subject' + rand(99999).to_s
     @issue2_subject = 'subject' + rand(99999).to_s
     @issue3_subject = 'subject' + rand(99999).to_s
@@ -98,10 +95,6 @@ module HelperMethods
   end
 
   def add_user
-    register_user1
-    @driver.find_element(:class, 'logout').click
-
-    create_project
     @driver.find_element(:id, "tab-members").click
     @driver.find_element(:xpath, ".//*[@id='tab-content-members']//a[@class='icon icon-add']").click
     @wait.until {@driver.find_element(:id, "principal_search").displayed?}
@@ -117,7 +110,6 @@ module HelperMethods
   end
 
   def edit_user
-    create_project
     @driver.find_element(:id, "tab-members").click
     @driver.find_element(:xpath, ".//td/a[@class='icon icon-edit']").click
     @driver.find_element(:xpath, "*//input[@value='4'][@type='checkbox']").click

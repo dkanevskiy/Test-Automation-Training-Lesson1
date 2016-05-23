@@ -12,6 +12,7 @@ class TestLogout < Test::Unit::TestCase
 
   def test_logout
     register_user
+    login_user
     @driver.find_element(:class, 'logout').click
     login_button = @driver.find_element(:class, 'login')
     assert(login_button.displayed?)

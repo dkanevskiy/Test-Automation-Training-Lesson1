@@ -11,6 +11,7 @@ class TestLogin < Test::Unit::TestCase
   end
 
   def test_login
+    register_user
     login_user
     myaccount_button = @driver.find_element(:class, 'my-account')
     assert(myaccount_button.displayed?)

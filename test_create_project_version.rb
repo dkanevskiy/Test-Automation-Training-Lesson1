@@ -11,6 +11,8 @@ class TestCreateProjectVersion < Test::Unit::TestCase
   end
 
   def test_create_project_version
+    register_user
+    create_project
     create_project_version
 
     expected_text = @version_name

@@ -11,7 +11,12 @@ class TestAddUser < Test::Unit::TestCase
   end
 
   def test_add_user
+    register_user1
+    @driver.find_element(:class, 'logout').click
+    register_user
+    create_project
     add_user
+
     user_link = @driver.find_element(:link, "#{@login1}\s#{@login1}")
     assert(user_link.displayed?)
   end
