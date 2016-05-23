@@ -16,7 +16,6 @@ class TestAddUser < Test::Unit::TestCase
     register_user
     create_project
     add_user
-
     user_link = @driver.find_element(:link, "#{@login1}\s#{@login1}")
     assert(user_link.displayed?)
   end

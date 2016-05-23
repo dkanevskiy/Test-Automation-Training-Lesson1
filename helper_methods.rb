@@ -74,34 +74,34 @@ module HelperMethods
     @driver.find_element(:class, "new-issue").click
     @wait.until {@driver.find_element(:id, "issue_subject").displayed?}
     @driver.find_element(:id, "issue_subject").send_keys(@issue1_subject)
-    @driver.find_element(:xpath, ".//*[@id='issue-form']/input[@value='Create']").click
+    @driver.find_element(:css, "input[name=commit]").click
 
     @driver.find_element(:class, "new-issue").click
     @wait.until {@driver.find_element(:id, "issue_subject").displayed?}
     @driver.find_element(:id, "issue_subject").send_keys(@issue2_subject)
     @driver.find_element(:id, "issue_priority_id").click
-    @driver.find_element(:xpath, ".//*[@id='issue_priority_id']/option[@value='5']").click
-    @driver.find_element(:xpath, ".//*[@id='issue-form']/input[@value='Create']").click
-    @driver.find_element(:xpath, ".//*[@id='issue-form']/input[@value='Create']").click
+    @driver.find_element(:css, "#issue_priority_id>option:first-child").click
+    @driver.find_element(:css, "input[name=commit]").click
+    @driver.find_element(:css, "input[name=commit]").click
 
     @driver.find_element(:class, "new-issue").click
     @wait.until {@driver.find_element(:id, "issue_subject").displayed?}
     @driver.find_element(:id, "issue_subject").send_keys(@issue3_subject)
     @driver.find_element(:id, "issue_priority_id").click
-    @driver.find_element(:xpath, ".//*[@id='issue_priority_id']/option[@value='6']").click
-    @driver.find_element(:xpath, ".//*[@id='issue-form']/input[@value='Create']").click
-    @driver.find_element(:xpath, ".//*[@id='issue-form']/input[@value='Create']").click
-    @driver.find_element(:xpath, ".//*[@id='main-menu']//a[@class='issues selected']").click
+    @driver.find_element(:css, "#issue_priority_id>option:last-child").click
+    @driver.find_element(:css, "input[name=commit]").click
+    @driver.find_element(:css, "input[name=commit]").click
+    @driver.find_element(:css, "a.issues.selected").click
   end
 
   def add_user
     @driver.find_element(:id, "tab-members").click
-    @driver.find_element(:xpath, ".//*[@id='tab-content-members']//a[@class='icon icon-add']").click
+    @driver.find_element(:css, "div>p:first-child>a.icon.icon-add").click
     @wait.until {@driver.find_element(:id, "principal_search").displayed?}
     @driver.find_element(:id, "principal_search").send_keys(@login1)
     @wait.until {@driver.find_element(:xpath, ".//label[contains(text(),#{@login1})]").displayed?}
-    @driver.find_element(:xpath, ".//*[@id='principals']//input[@type='checkbox']").click
-    @driver.find_element(:xpath, ".//*[@id='new_membership']//input[@value='3']").click
+    @driver.find_element(:css, "#principals>label>input").click
+    @driver.find_element(:css, ".roles-selection>label:first-child>input").click
     @driver.find_element(:id, "member-add-submit").click
     @wait.until {@driver.find_element(:class, "home").displayed?}
     @driver.find_element(:class, "home").click
@@ -111,8 +111,8 @@ module HelperMethods
 
   def edit_user
     @driver.find_element(:id, "tab-members").click
-    @driver.find_element(:xpath, ".//td/a[@class='icon icon-edit']").click
-    @driver.find_element(:xpath, "*//input[@value='4'][@type='checkbox']").click
+    @driver.find_element(:css, "a.icon.icon-edit").click
+    @driver.find_element(:css, "input[type='checkbox'][value='4']").click
     @driver.action.send_keys(:enter).perform
   end
 
