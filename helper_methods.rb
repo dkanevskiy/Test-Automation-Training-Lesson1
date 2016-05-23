@@ -43,7 +43,7 @@ module HelperMethods
   def change_password
     @new_password = @password + '1'
     @driver.find_element(:class, "my-account").click
-    @driver.find_element(:xpath, ".//*[@id='content']//a[@class='icon icon-passwd']").click
+    @driver.find_element(:css, "a.icon.icon-passwd").click
     @driver.find_element(:id, "password").send_keys(@password)
     @driver.find_element(:id, "new_password").send_keys(@new_password)
     @driver.find_element(:id, "new_password_confirmation").send_keys(@new_password)
@@ -52,18 +52,18 @@ module HelperMethods
 
   def create_project
     @driver.find_element(:class, "projects").click
-    @driver.find_element(:xpath, ".//*[@id='content']//a[@class='icon icon-add']").click
+    @driver.find_element(:css, "a.icon.icon-add").click
     @project_name = 'Project' + rand(9999).to_s
     @driver.find_element(:id, "project_name").send_keys(@project_name)
-    @driver.find_element(:xpath, ".//*[@id='new_project']/input[@name='commit']").click
+    @driver.find_element(:name, "commit").click
   end
 
   def create_project_version
     @driver.find_element(:id, 'tab-versions').click
-    @driver.find_element(:xpath, ".//*[@id='tab-content-versions']//a[@class='icon icon-add']").click
+    @driver.find_element(:css, "div#tab-content-versions>p>a:last-of-type").click
     @version_name = 'version'+rand(99999).to_s
     @driver.find_element(:id, 'version_name').send_keys(@version_name)
-    @driver.find_element(:xpath, ".//*[@id='new_version']/input[@type='submit']").click
+    @driver.find_element(:name, "commit").click
   end
 
   def create_issues
