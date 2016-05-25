@@ -57,13 +57,16 @@ class TestRedmineApp < Test::Unit::TestCase
   def test_create_issues
     register_user
     create_project
-    create_issues
-    issue1 = @driver.find_element(:link, @issue1_subject)
-    issue2 = @driver.find_element(:link, @issue2_subject)
-    issue3 = @driver.find_element(:link, @issue3_subject)
-    assert(issue1.displayed?)
-    assert(issue2.displayed?)
-    assert(issue3.displayed?)
+    create_issue_normal
+    create_issue_low
+    create_issue_immediate
+    @driver.find_element(:css, "a.issues.selected").click
+    issue_normal = @driver.find_element(:link, @issue_normal_subject)
+    issue_low = @driver.find_element(:link, @issue_low_subject)
+    issue_immediate = @driver.find_element(:link, @issue_immediate_subject)
+    assert(issue_normal.displayed?)
+    assert(issue_low.displayed?)
+    assert(issue_immediate.displayed?)
   end
 
   def test_add_user

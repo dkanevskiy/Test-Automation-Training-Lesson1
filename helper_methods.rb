@@ -43,7 +43,7 @@ module HelperMethods
   def change_password
     @new_password = @password + '1'
     @driver.find_element(:class, "my-account").click
-    @driver.find_element(:css, "a.icon.icon-passwd").click
+    @driver.find_element(:class, 'icon-passwd').click
     @driver.find_element(:id, "password").send_keys(@password)
     @driver.find_element(:id, "new_password").send_keys(@new_password)
     @driver.find_element(:id, "new_password_confirmation").send_keys(@new_password)
@@ -52,7 +52,7 @@ module HelperMethods
 
   def create_project
     @driver.find_element(:class, "projects").click
-    @driver.find_element(:css, "a.icon.icon-add").click
+    @driver.find_element(:class, 'icon-add').click
     @project_name = 'Project' + rand(9999).to_s
     @driver.find_element(:id, "project_name").send_keys(@project_name)
     @driver.find_element(:name, "commit").click
@@ -60,48 +60,50 @@ module HelperMethods
 
   def create_project_version
     @driver.find_element(:id, 'tab-versions').click
-    @driver.find_element(:css, "div#tab-content-versions>p>a:last-of-type").click
+    @driver.find_element(:css, "#tab-content-versions .icon-add").click
     @version_name = 'version'+rand(99999).to_s
     @driver.find_element(:id, 'version_name').send_keys(@version_name)
     @driver.find_element(:name, "commit").click
   end
 
-  def create_issues
-    @issue1_subject = 'subject' + rand(99999).to_s
-    @issue2_subject = 'subject' + rand(99999).to_s
-    @issue3_subject = 'subject' + rand(99999).to_s
-
+  def create_issue_normal
+    @issue_normal_subject = 'subject' + rand(99999).to_s
     @driver.find_element(:class, "new-issue").click
     @wait.until {@driver.find_element(:id, "issue_subject").displayed?}
-    @driver.find_element(:id, "issue_subject").send_keys(@issue1_subject)
+    @driver.find_element(:id, "issue_subject").send_keys(@issue_normal_subject)
     @driver.find_element(:css, "input[name=commit]").click
+  end
 
+  def create_issue_low
+    @issue_low_subject = 'subject' + rand(99999).to_s
     @driver.find_element(:class, "new-issue").click
     @wait.until {@driver.find_element(:id, "issue_subject").displayed?}
-    @driver.find_element(:id, "issue_subject").send_keys(@issue2_subject)
+    @driver.find_element(:id, "issue_subject").send_keys(@issue_low_subject)
     @driver.find_element(:id, "issue_priority_id").click
     @driver.find_element(:css, "#issue_priority_id>option:first-child").click
-    @driver.find_element(:css, "input[name=commit]").click
-    @driver.find_element(:css, "input[name=commit]").click
+    @driver.find_element(:name, "commit").click
+    @driver.find_element(:name, "commit").click
+  end
 
+  def create_issue_immediate
+    @issue_immediate_subject = 'subject' + rand(99999).to_s
     @driver.find_element(:class, "new-issue").click
     @wait.until {@driver.find_element(:id, "issue_subject").displayed?}
-    @driver.find_element(:id, "issue_subject").send_keys(@issue3_subject)
+    @driver.find_element(:id, "issue_subject").send_keys(@issue_immediate_subject)
     @driver.find_element(:id, "issue_priority_id").click
     @driver.find_element(:css, "#issue_priority_id>option:last-child").click
-    @driver.find_element(:css, "input[name=commit]").click
-    @driver.find_element(:css, "input[name=commit]").click
-    @driver.find_element(:css, "a.issues.selected").click
+    @driver.find_element(:name, "commit").click
+    @driver.find_element(:name, "commit").click
   end
 
   def add_user
     @driver.find_element(:id, "tab-members").click
-    @driver.find_element(:css, "div>p:first-child>a.icon.icon-add").click
+    @driver.find_element(:css, "p:first-child>a.icon.icon-add").click
     @wait.until {@driver.find_element(:id, "principal_search").displayed?}
     @driver.find_element(:id, "principal_search").send_keys(@login1)
     @wait.until {@driver.find_element(:xpath, ".//label[contains(text(),#{@login1})]").displayed?}
-    @driver.find_element(:css, "#principals>label>input").click
-    @driver.find_element(:css, ".roles-selection>label:first-child>input").click
+    @driver.find_element(:css, "#principals input").click
+    @driver.find_element(:css, ".roles-selection input[value='3']").click
     @driver.find_element(:id, "member-add-submit").click
     @wait.until {@driver.find_element(:class, "home").displayed?}
     @driver.find_element(:class, "home").click
