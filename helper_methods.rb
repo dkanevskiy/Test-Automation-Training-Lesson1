@@ -71,7 +71,7 @@ module HelperMethods
     @driver.find_element(:class, "new-issue").click
     @wait.until {@driver.find_element(:id, "issue_subject").displayed?}
     @driver.find_element(:id, "issue_subject").send_keys(@issue_normal_subject)
-    @driver.find_element(:css, "input[name=commit]").click
+    @driver.find_element(:name, "commit").click
   end
 
   def create_issue_low
@@ -98,7 +98,7 @@ module HelperMethods
 
   def add_user
     @driver.find_element(:id, "tab-members").click
-    @driver.find_element(:css, "p:first-child>a.icon.icon-add").click
+    @driver.find_element(:css, "#tab-content-members .icon-add").click
     @wait.until {@driver.find_element(:id, "principal_search").displayed?}
     @driver.find_element(:id, "principal_search").send_keys(@login1)
     @wait.until {@driver.find_element(:xpath, ".//label[contains(text(),#{@login1})]").displayed?}

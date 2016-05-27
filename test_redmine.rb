@@ -61,12 +61,12 @@ class TestRedmineApp < Test::Unit::TestCase
     create_issue_low
     create_issue_immediate
     @driver.find_element(:css, "a.issues.selected").click
-    issue_normal = @driver.find_element(:link, @issue_normal_subject)
-    issue_low = @driver.find_element(:link, @issue_low_subject)
-    issue_immediate = @driver.find_element(:link, @issue_immediate_subject)
-    assert(issue_normal.displayed?)
-    assert(issue_low.displayed?)
-    assert(issue_immediate.displayed?)
+    issue1 = @driver.find_element(:link, @issue1_subject)
+    issue2 = @driver.find_element(:link, @issue2_subject)
+    issue3 = @driver.find_element(:link, @issue3_subject)
+    assert(issue1.displayed?)
+    assert(issue2.displayed?)
+    assert(issue3.displayed?)
   end
 
   def test_add_user
@@ -84,8 +84,8 @@ class TestRedmineApp < Test::Unit::TestCase
     create_project
     edit_user
     @wait.until {@driver.find_element(:xpath, ".//span[contains(.,'Manager, Developer')]").displayed?}
-    user_roles = @driver.find_element(:xpath, ".//span[contains(.,'Manager, Developer')]")
-    assert(user_roles.displayed?)
+    user_roles = @driver.find_element(:xpath, ".//span[contains(.,'Manager, Developer')]").text
+    assert(user_roles.include? 'Manager, Developer')
   end
 
   def teardown
