@@ -4,7 +4,7 @@ module HelperMethods
     @driver.navigate.to 'http://demo.redmine.org'
     @driver.find_element(:class, 'register').click
     @wait.until {@driver.find_element(:id, 'user_login').displayed?}
-    @login = 'login'+rand(99999).to_s
+    @login = 'user'+rand(99999).to_s
     @password = 'Qwerty11'
     @driver.find_element(:id, 'user_login').send_keys(@login)
     @driver.find_element(:id, 'user_password').send_keys(@password)
@@ -19,7 +19,7 @@ module HelperMethods
     @driver.navigate.to 'http://demo.redmine.org'
     @driver.find_element(:class, 'register').click
     @wait.until {@driver.find_element(:id, 'user_login').displayed?}
-    @login1 = 'login'+rand(99999).to_s
+    @login1 = 'user'+rand(99999).to_s
     @password = 'Qwerty11'
     @driver.find_element(:id, 'user_login').send_keys(@login1)
     @driver.find_element(:id, 'user_password').send_keys(@password)
@@ -66,33 +66,13 @@ module HelperMethods
     @driver.find_element(:name, "commit").click
   end
 
-  def create_issue_normal
-    @issue_normal_subject = 'subject' + rand(99999).to_s
+  def create_issue(type)
+    @issue_subject = 'subject' + rand(99999).to_s
     @driver.find_element(:class, "new-issue").click
     @wait.until {@driver.find_element(:id, "issue_subject").displayed?}
-    @driver.find_element(:id, "issue_subject").send_keys(@issue_normal_subject)
-    @driver.find_element(:name, "commit").click
-  end
-
-  def create_issue_low
-    @issue_low_subject = 'subject' + rand(99999).to_s
-    @driver.find_element(:class, "new-issue").click
-    @wait.until {@driver.find_element(:id, "issue_subject").displayed?}
-    @driver.find_element(:id, "issue_subject").send_keys(@issue_low_subject)
-    @driver.find_element(:id, "issue_priority_id").click
-    @driver.find_element(:css, "#issue_priority_id>option:first-child").click
-    @driver.find_element(:name, "commit").click
-    @driver.find_element(:name, "commit").click
-  end
-
-  def create_issue_immediate
-    @issue_immediate_subject = 'subject' + rand(99999).to_s
-    @driver.find_element(:class, "new-issue").click
-    @wait.until {@driver.find_element(:id, "issue_subject").displayed?}
-    @driver.find_element(:id, "issue_subject").send_keys(@issue_immediate_subject)
-    @driver.find_element(:id, "issue_priority_id").click
-    @driver.find_element(:css, "#issue_priority_id>option:last-child").click
-    @driver.find_element(:name, "commit").click
+    @driver.find_element(:id, "issue_subject").send_keys(@issue_subject)
+    option = Selenium::WebDriver::Support::Select.new(@driver.find_element(:id => "issue_priority_id"))
+    option.select_by(:text, "#{type}")
     @driver.find_element(:name, "commit").click
   end
 
