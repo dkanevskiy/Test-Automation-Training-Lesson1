@@ -83,9 +83,8 @@ class TestRedmineApp < Test::Unit::TestCase
     register_user
     create_project
     edit_user
-    @wait.until {@driver.find_element(:xpath, ".//span[contains(.,'Manager, Developer')]").displayed?}
-    user_roles = @driver.find_element(:xpath, ".//span[contains(.,'Manager, Developer')]").text
-    assert(user_roles.include? 'Manager, Developer')
+    user_roles = @driver.find_element(:css, ".roles span").text
+    assert(user_roles.include? ',')
   end
 
   def teardown
