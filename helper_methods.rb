@@ -81,11 +81,11 @@ module HelperMethods
     @driver.find_element(:css, "#tab-content-members .icon-add").click
     @wait.until {@driver.find_element(:id, "principal_search").displayed?}
     @driver.find_element(:id, "principal_search").send_keys(@login1)
-    @wait.until {@driver.find_element(:xpath, ".//label[contains(text(),'#{@login1}')]/input[@type='checkbox']").displayed?}
+    @wait.until {@driver.find_element(:xpath, "//*[.='(1-1/1)'] ").displayed?}
     @driver.find_element(:css, "#principals input").click
     @driver.find_element(:css, ".roles-selection input[value='3']").click
     @driver.find_element(:id, "member-add-submit").click
-    sleep 3
+    @wait.until {!@driver.find_element(:id, "principal_search").displayed?}
     @driver.find_element(:class, "home").click
     @wait.until {@driver.find_element(:link, "#{@project_name}").displayed?}
     @driver.find_element(:link, "#{@project_name}").click
